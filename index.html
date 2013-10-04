@@ -3,10 +3,19 @@
 		<title> Dynamical Systems </title>
     	<link type="text/css" rel="stylesheet" href="css/styles.css" />
 <form id="functions" action="#">
-	<input id="dxdt" type="text" value="function(t,x,y){ return x; }" />
+	dx/dt = <input id="dxdt" type="text" value="y" />
 	<br>
-	<input id="dydt" type="text" value="function(t,x,y){ return y; }" />
+	dy/dt = <input id="dydt" type="text" value="-y/5 - sin(x)" />
 	<br>
+	
+	<div id="time">
+		step = <input id="step" type="text" value=".1" />
+		t0 = <input id="t0" type="text" value="0" />
+		tend = <input id="tend" type="text" value="15" />
+	</div>
+
+	<input id="clear" type="submit" value="clear" />
+	<input id="random" type="submit" value="random!" />
 	<input type="submit" value="submit" />
 </form>
 
