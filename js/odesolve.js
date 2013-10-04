@@ -1,3 +1,6 @@
+var sin = Math.sin;
+var cos = Math.cos;
+var tan = Math.tan;
 function plus(x,y){ return x + y; }
 function sumAll(x){ return _.reduce(x, plus); }
 
@@ -16,7 +19,7 @@ function getF(dxdt, dydt){
 		return [xdot, ydot];
 	};
 }
-function odeSolve(dxdt, dydt, initial_value, step_size, t_end){
+function odeSolve(dxdt, dydt, initial_value, step_size, t0, tend){
 	f = getF(dxdt, dydt); // convert f from f(t,x,y) -> f(t, array)
 
 
@@ -35,7 +38,7 @@ function odeSolve(dxdt, dydt, initial_value, step_size, t_end){
 		// yn + (h/6)*(k1 + 2*k2 + 2*k3 + k4);
 	}	
 	
-	for(var t = 0; t < t_end ; t = t + h){
+	for(var t = t0; t < tend ; t = t + h){
 		var y = rungeKutta(t, y);
 		points.push(y);
 	}
