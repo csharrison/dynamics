@@ -1,6 +1,11 @@
-var sin = Math.sin;
-var cos = Math.cos;
-var tan = Math.tan;
+try{
+	_.each(Object.getOwnPropertyNames(Math), function(func){
+		eval(func+' = Math.'+func);
+	})
+}catch(err){
+
+}
+
 function plus(x,y){ return x + y; }
 function sumAll(x){ return _.reduce(x, plus); }
 
