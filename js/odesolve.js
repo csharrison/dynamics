@@ -16,16 +16,17 @@ function sum(){
 	return _.map(_.zip.apply(null, arguments), sumAll);
 }
 
-function getF(dxdt, dydt){
+function getF(dxdt, dydt, dzdt){
 	return function(t, point){
 		args = [t].concat(point);
 		xdot = dxdt.apply(null, args);
 		ydot = dydt.apply(null, args);
-		return [xdot, ydot];
+		zdot = dzdt.apply(null, args);
+		return [xdot, ydot, zdot];
 	};
 }
-function odeSolve(dxdt, dydt, initial_value, step_size, t0, tend){
-	f = getF(dxdt, dydt); // convert f from f(t,x,y) -> f(t, array)
+function odeSolve(dxdt, dydt, dzdt, initial_value, step_size, t0, tend){
+	f = getF(dxdt, dydt, dzdt); // convert f from f(t,x,y) -> f(t, array)
 
 
 	var h = step_size;

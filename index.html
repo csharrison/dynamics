@@ -3,11 +3,13 @@
 		<title> Dynamical Systems </title>
     	<link type="text/css" rel="stylesheet" href="css/styles.css" />
 <form id="functions" action="#">
-	dx/dt = <input id="dxdt" type="text" value="y" />
+	dx/dt = <input id="dxdt" type="text" value="10*(y - x)" />
 	<br>
-	dy/dt = <input id="dydt" type="text" value="-y/5 - sin(x)" />
+	dy/dt = <input id="dydt" type="text" value="x*(28 - z) - y" />
 	<br>
-	
+	dz/dt = <input id="dzdt" type="text" value="x*y - (8/3)*z" />
+
+
 	<div id="time">
 		step = <input id="step" type="text" value=".1" />
 		t0 = <input id="t0" type="text" value="0" />
