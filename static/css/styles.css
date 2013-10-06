@@ -1,0 +1,10 @@
+canvas {
+	border : 1px dotted;
+	float : left;
+}
+form {
+	float:left;
+}
+#time input{
+	width: 25px;
+}
