@@ -5,6 +5,12 @@ canvas {
 form {
 	float:left;
 }
-#time input{
+#time input, #start input{
 	width: 25px;
+}
+#mathbox{
+	position:relative;
+	float: left;
+	width:500px;
+	height:500px;
 }

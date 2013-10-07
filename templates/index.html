@@ -27,11 +27,20 @@
 		t0 = <input id="t0" type="text" value="0" />
 		tend = <input id="tend" type="text" value="55" />
 	</div>
+  <div id="start">
+    x0 = <input id="x0" type="text" value="1" />
+    y0 = <input id="y0" type="text" value="1" />
+    z0 = <input id="z0" type="text" value="1" />
+  </div>
 
 	<input id="clear" type="submit" value="clear" />
 	<input id="random" type="submit" value="random!" />
 	<input type="submit" value="submit" />
 </form>
+
+<div id="mathbox">
+
+</div>
 
 </body>
 
@@ -84,11 +93,12 @@
     ], function () {
 
       // MathBox boilerplate
-      var mathbox = window.mathbox = mathBox({
+      var elt = document.getElementById('mathbox');
+      var mathbox = window.mathbox = mathBox(elt,{
         cameraControls: true,
         cursor:         true,
         controlClass:   ThreeBox.OrbitControls,
-        elementResize:  false,
+        elementResize:  true,
         fullscreen:     false,
         screenshot:     true,
         stats:          false,
