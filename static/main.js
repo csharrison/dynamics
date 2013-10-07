@@ -8,12 +8,8 @@ function rand(){
 function is2D(){
 	return $("#dzdt").val() === "0";
 }
-var ymin = -20,
-	ymax = 20,
-	xmin = -20,
-	xmax = 20,
-	zmin = -20,
-	zmax = 20;
+
+
 function getColorString(z){
 	z = Math.pow(z,2);
 	var r = ((z % 255)+255) % 255;;
@@ -32,7 +28,8 @@ function evalArguments(){
 	y0 = _.map(['x0','y0','z0'], function(elt){
 		return parseFloat($("#"+elt).val(),10);
 	});
-	return [y0, dxdt, dydt, dzdt, step, t0, tend];
+	points = $("#points").is(':checked');
+	return [y0, dxdt, dydt, dzdt, step, t0, tend, points];
 }
 
 function reset(){
@@ -40,48 +37,19 @@ function reset(){
 	return false;
 }
 
-function drawIt(y0, dxdt, dydt, dzdt, step, t0, tend, color){
+function drawIt(y0, dxdt, dydt, dzdt, step, t0, tend, draw_points, color){
 	if(!color){ color = 0x123456}
 	var points = odeSolve(dxdt, dydt, dzdt, y0, step, t0, tend);
-	mathbox/*.axis({
-	  id: 'x-axis',
-	  axis: 0,
-	  color: 0xa0a0a0,
-	  ticks: 5,
-	  lineWidth: 2,
-	  size: .05,
-	  labels: true,
-	})/*
-	.axis({
-	  id: 'y-axis',
-	  axis: 1,
-	  color: 0xa0a0a0,
-	  ticks: 5,
-	  lineWidth: 2,
-	  size: .05,
-	  labels: true,
-	  zero: false,
-	})
-	.axis({
-	  id: 'z-axis',
-	  axis: 2,
-	  color: 0xa0a0a0,
-	  ticks: 5,
-	  lineWidth: 2,
-	  size: .05,
-	  zero: false,
-	  labels: true,
-	})*/
-	.curve({
+	mathbox.curve({
 	  n: points.length,
 	  id: Math.random().toString(),
 	  data: points,
 	  line: true,
-	  points: false,
+	  points: draw_points,
 	  color: color,
-	  lineWidth: 1,
-	  style : {
-	  	color:color
+	  lineWidth: 2,
+	  style: {
+	  	color: color
 	  }
 	});
 }
@@ -111,5 +79,15 @@ DomReady.ready(function(){
 	});
 	$("#clear").click(reset);
 
+	var $es = $("#examples");
+	_.each(window.examples, function(eg){
+		var elt = $(document.createElement('button')).text(eg.name);
+		elt.click(function(){
+			$("#dxdt").val(eg.dxdt);
+			$("#dydt").val(eg.dydt);
+			$("#dzdt").val(eg.dzdt);
+		});
+		$es.append(elt);
+	});
 
 });
