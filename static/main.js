@@ -1,5 +1,7 @@
 var WIDTH = 20, HEIGHT = 20, DEPTH = 20;
-
+function rcolor(){
+	return parseInt(Math.floor(Math.random()*16777215).toString(16),16);
+}
 function rand(){
 	return (Math.random() * 2) - 1;
 }
@@ -38,10 +40,9 @@ function reset(){
 	return false;
 }
 
-function drawIt(y0, dxdt, dydt, dzdt, step, t0, tend){
+function drawIt(y0, dxdt, dydt, dzdt, step, t0, tend, color){
+	if(!color){ color = 0x123456}
 	var points = odeSolve(dxdt, dydt, dzdt, y0, step, t0, tend);
-	mathbox.grid()
-	if(! is2D()){ mathbox.grid({axis:[1,2]});}
 	mathbox/*.axis({
 	  id: 'x-axis',
 	  axis: 0,
@@ -77,19 +78,31 @@ function drawIt(y0, dxdt, dydt, dzdt, step, t0, tend){
 	  data: points,
 	  line: true,
 	  points: false,
+	  color: color,
 	  lineWidth: 1,
+	  style : {
+	  	color:color
+	  }
 	});
 }
 DomReady.ready(function(){
 	$("#functions").submit(function(){
 		reset();
+		mathbox.grid()
+		if(! is2D()){ mathbox.grid({axis:[1,2]});}
+
 		drawIt.apply(null, evalArguments());
 		return false;
 	})
 	$("#random").click(function(){
-		if(is2D()){ DEPTH = 0; }
+		if(is2D()){ 
+			DEPTH = 0; 
+			mathbox.grid({axis:[1,2]});
+		}
+		mathbox.grid()
 		for(var i = 0; i < 20; i++){
 			var args = evalArguments();
+			args.push(rcolor());
 			args[0] = [rand()*WIDTH, rand()*HEIGHT, rand() * DEPTH];
 			drawIt.apply(null, args);
 		}
