@@ -97,10 +97,11 @@ DomReady.ready(function(){
 	$("#random").click(function(){
 		if(is2D()){ 
 			DEPTH = 0; 
+		}else{
 			mathbox.grid({axis:[1,2]});
 		}
 		mathbox.grid()
-		for(var i = 0; i < 20; i++){
+		for(var i = 0; i < 10; i++){
 			var args = evalArguments();
 			args.push(rcolor());
 			args[0] = [rand()*WIDTH, rand()*HEIGHT, rand() * DEPTH];
