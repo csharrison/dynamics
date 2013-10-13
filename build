@@ -1,9 +1,0 @@
-rm -rf tmp
-mkdir tmp
-
-cp */* tmp/
-cp */*/* tmp/ 
-cp index.html tmp/
-
-
- sed -e 's/src="js\//src="/g' -e 's/src="lib\//src="/g' -e 's/href="css\//href="/g' <index.html >tmp/index.html

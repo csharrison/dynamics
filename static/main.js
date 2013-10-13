@@ -29,6 +29,12 @@ function evalArguments(){
 		return parseFloat($("#"+elt).val(),10);
 	});
 	points = $("#points").is(':checked');
+
+
+	_.each(['dxdt','dydt','dzdt'], function(i){
+		var elt = $("#"+i);
+		localStorage.setItem(i,elt.val());
+	});
 	return [y0, dxdt, dydt, dzdt, step, t0, tend, points];
 }
 
@@ -90,4 +96,8 @@ DomReady.ready(function(){
 		$es.append(elt);
 	});
 
+
+	_.each(['dxdt','dydt','dzdt'], function(i){
+		$("#"+i).val(localStorage.getItem(i));
+	});
 });
